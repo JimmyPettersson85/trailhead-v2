@@ -1,0 +1,19 @@
+{
+  "name": "trailhead",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Trailhead: a small hiking community backend built on Stream Activity Feeds",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "simulate": "node scripts/simulate.js"
+  },
+  "dependencies": {
+    "express": "4.21.2",
+    "getstream": "8.15.0"
+  }
+}
