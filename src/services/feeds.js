@@ -16,8 +16,9 @@ function present(activity) {
     id: activity.id,
     kind: activity.verb,
     author: activity.actor?.data ? { id: activity.actor.id, ...activity.actor.data } : activity.actor,
-    text: activity.body ?? activity.text,
-    photos: activity.media || [],
+    // Posts written before September 2025 store body/media.
+    text: activity.text ?? activity.body,
+    photos: activity.attachments?.images || activity.media || [],
     trail: activity.object?.collection === 'trail' ? { id: activity.object.id, ...activity.object.data } : null,
     reshareOf: activity.verb === 'share' && typeof activity.object === 'object' ? present(activity.object) : null,
     hashtags: activity.hashtags || [],

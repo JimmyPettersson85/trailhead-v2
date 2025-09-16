@@ -28,8 +28,8 @@ export async function createPost(authorId, { text, photos = [], trailId }) {
     object: trailId ? trailRef(trailId) : postForeignId(postId),
     foreign_id: postForeignId(postId),
     time: createdAt,
-    body: text,
-    media: photos,
+    text,
+    attachments: { images: photos },
     hashtags: hashtagsIn(text),
     mentions: mentioned.map(userRef),
     to,
@@ -44,7 +44,7 @@ export async function editPost(authorId, postId, { text }) {
   await client.activityPartialUpdate({
     foreign_id: postForeignId(post.id),
     time: post.created_at,
-    set: { body: text, hashtags: hashtagsIn(text) },
+    set: { text, hashtags: hashtagsIn(text) },
   });
   return { id: post.id };
 }
